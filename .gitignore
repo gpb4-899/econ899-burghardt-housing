@@ -47,3 +47,13 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# ECON 899: do not version data
+Data/raw_data/*
+Data/data_for_analysis/*
+!Data/**/README.md
+Results/tables/*
+Results/figures/*
+!Results/**/README.md
+*.Rproj.user
+.Rhistory
