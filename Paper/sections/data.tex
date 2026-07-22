@@ -1,0 +1,71 @@
+\section{Data}
+\label{sec:data}
+
+I build a quarterly country by quarter panel of eleven euro area countries,
+Austria, Belgium, Germany, Spain, Finland, France, Greece, Ireland, Italy, the
+Netherlands and Portugal, starting in 1999, the first year of the common
+monetary policy. This section describes the four building blocks of the panel:
+house prices, the monetary policy shock, the macroeconomic controls, and the
+measure of mortgage market structure. Table \ref{tab:summary} reports summary
+statistics for the estimation sample.
+
+\subsection{House prices}
+
+The outcome variable is the real residential property price index from the OECD
+Analytical House Prices dataset, which I download through DBnomics. The series
+is quarterly and is expressed as an index with base year 2015. Index levels are
+not informative across countries, so I take logs and work with cumulative log
+changes, which gives the house price response in percent and does not depend on
+the choice of base year.
+
+\subsection{Monetary policy shock}
+
+The monetary policy shock comes from the Euro Area Monetary Policy event study
+Database (EA-MPD) of \citet{altavilla2019}. The database records high frequency
+changes in asset prices in a narrow window around each ECB monetary policy
+event. I use the Monetary Event Window, which spans both the policy decision
+and the press conference, and take the surprise in the three month overnight
+index swap (OIS) rate as the interest rate signal. The three month rate is a
+standard near term policy indicator and is considerably less noisy than the one
+month rate.
+
+A well known problem is that not every interest rate surprise is a pure
+monetary policy shock. When the central bank reveals private information about
+the economy, interest rates and stock prices move in the same direction, which
+contaminates the surprise. I isolate pure monetary policy shocks using the
+sign restriction of \citet{jarocinski2020}. For each event I compare the sign of
+the interest rate surprise with the sign of the EURO STOXX 50 return in the same
+window. When the two move in opposite directions the event is a pure monetary
+policy shock and I keep the interest rate surprise. When they move in the same
+direction the event is treated as a central bank information shock and set to
+zero. I then aggregate the event level pure shocks to the quarterly frequency by
+summation. Without this correction the raw surprise produces a counterintuitive
+positive house price response to tightening, which the information cleaned
+series removes.
+
+\subsection{Macroeconomic controls}
+
+I control for the domestic macroeconomic environment using three series from
+Eurostat. Real gross domestic product (chain linked volumes, seasonally
+adjusted) enters as the quarter on quarter growth rate. Consumer prices enter as
+the year on year rate of change of the Harmonised Index of Consumer Prices.
+Unemployment is the harmonised unemployment rate; I take the monthly series and
+average it to quarterly frequency, since the monthly release reaches back to the
+late 1990s and covers the whole sample, whereas the quarterly release starts
+only around 2009 for most countries. All controls enter lagged one quarter so
+that they are predetermined with respect to the shock. I also include a dummy
+for the pandemic quarters (2020 through the first half of 2021), because quarter
+on quarter GDP growth reaches roughly twenty percent in absolute value in those
+quarters and would otherwise dominate the estimation.
+
+\subsection{Mortgage market structure}
+
+The moderator of interest is the structure of the national mortgage market,
+specifically whether mortgages are predominantly fixed or variable rate. I
+classify each country as adjustable rate dominant or fixed rate dominant
+following \citet{badarinza2018} and related euro area evidence. Germany,
+Austria, France, Belgium and the Netherlands are classified as fixed rate
+dominant, and Finland, Ireland, Portugal, Spain, Italy and Greece as variable
+rate dominant. This binary classification is transparent but coarse, since the
+variable rate share in fact varies continuously across countries and over time;
+I return to this limitation in the concluding section.

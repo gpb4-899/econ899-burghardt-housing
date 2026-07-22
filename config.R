@@ -20,3 +20,12 @@ SAMPLE_COUNTRIES <- c("DE","FR","IT","ES","NL","BE","AT","FI","IE","PT","GR")
 # Sample period
 SAMPLE_START <- "1999-01-01"
 
+# Mortgage market structure: 1 = adjustable rate dominant, 0 = fixed rate
+# dominant. Based on Badarinza et al. (2018) and related euro area evidence.
+# Defined here so every program uses the same classification.
+MORTGAGE_STRUCTURE <- data.frame(
+  country = c("DE","AT","FR","BE","NL","FI","IE","PT","ES","IT","GR"),
+  arm     = c(  0,   0,   0,   0,   0,   1,   1,   1,   1,   1,   1),
+  stringsAsFactors = FALSE
+)
+

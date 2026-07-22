@@ -1,3 +1,6 @@
+# macOS
+.DS_Store
+
 # History files
 .Rhistory
 .Rapp.history
@@ -52,6 +55,9 @@ rsconnect/
 Data/raw_data/*
 Data/data_for_analysis/*
 !Data/**/README.md
+# Exception: the EA-MPD raw file is small and not downloadable via an
+# API, so it is committed to keep the replication package self contained.
+!Data/raw_data/Dataset_EA-MPD.xlsx
 Results/tables/*
 Results/figures/*
 !Results/**/README.md
