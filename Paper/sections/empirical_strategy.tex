@@ -44,13 +44,13 @@ Equation \eqref{eq:lp} is an estimating equation, not a structural model.
 The parameter of interest is $\delta_h$, the difference in the house price
 response between variable rate and fixed rate countries at horizon $h$. The
 budget channel described in Section \ref{sec:mechanism} predicts
-$\delta_h < 0$: in countries where mortgage payments react quickly to policy
+$\delta_h < 0$. In countries where mortgage payments react quickly to policy
 rates, a tightening should depress house prices by more. The average
 response $\beta_h$ and the remaining coefficients are auxiliary. The main
 effect of $ARM_c$ does not appear in the equation because it is constant
 over time and therefore absorbed by the country fixed effect. I cannot
-include time fixed effects: the shock is common to all countries, so time
-effects would absorb it completely. This is a real cost of the design, and I
+include time fixed effects, because the shock is common to all countries
+and time effects would absorb it completely. This is a real cost of the design, and I
 return to it below.
 
 \subsection{Identification}
@@ -67,7 +67,7 @@ revealed the central bank's private information about the economy. All
 controls enter with a lag, so they are predetermined with respect to the
 shock in quarter $t$.
 
-For $\delta_h$ a second assumption is needed: the mortgage market
+For $\delta_h$ a second assumption is needed. The mortgage market
 classification must not itself respond to monetary policy over the sample.
 This is plausible, because the fixed versus variable character of a national
 mortgage system is a slow moving institutional feature rooted in funding
@@ -88,9 +88,10 @@ and outcomes. This choice was made before comparing results across
 specifications. I report the same equation without the dynamic terms as an
 alternative, since the interaction turns out to be sensitive to this choice,
 and I consider that sensitivity a finding rather than a nuisance. The lags
-enter without an $ARM_c$ interaction; interacting the full lag set would add
-several parameters to a specification that is already asking a lot from
-eleven countries, so I keep the interaction to the contemporaneous term.
+enter without an $ARM_c$ interaction, because interacting the full lag set
+would add several parameters to a specification that is already asking a
+lot from eleven countries. I therefore keep the interaction to the
+contemporaneous term.
 
 Standard errors are Driscoll Kraay throughout. The shock is the same for
 all countries in a given quarter, so the errors are cross sectionally
