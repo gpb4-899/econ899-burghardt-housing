@@ -1,0 +1,65 @@
+\documentclass[12pt]{article}
+
+% ---------------------------------------------------------------
+% ECON 899 MA paper, Gil Burghardt, Simon Fraser University
+% Structure follows the course workshops: Abstract, Introduction,
+% Background, Mechanism, Data, Empirical strategy, Results,
+% Conclusion, References, Appendix.
+% Max 6000 words and 5 exhibits in the main text.
+% ---------------------------------------------------------------
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{booktabs}       % required by the fixest etable output
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage[round]{natbib}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{figures/}}
+\onehalfspacing
+
+\title{Mortgage market structure and the transmission of ECB monetary
+policy to euro area house prices}
+\author{Gil Burghardt\\Department of Economics, Simon Fraser University}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent
+% TODO: max 100 words, written last, purpose is to recruit a reader.
+\end{abstract}
+
+\input{sections/introduction}
+\input{sections/background}
+\input{sections/mechanism}
+\input{sections/data}
+\input{sections/empirical_strategy}
+\input{sections/results}
+\input{sections/conclusion}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\appendix
+
+\section{Appendix}
+\label{sec:appendix}
+
+% Robustness exhibits (outside the 5 exhibit budget of the main text):
+% unemployment robustness, shock validation, subsample split.
+\input{tables/lp_robust_unemp}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{shock_series.pdf}
+  \caption{Information cleaned ECB monetary policy shock. Quarterly sum
+  of the three month OIS surprises classified as pure monetary policy
+  events. Positive values are tightening surprises in basis points.}
+  \label{fig:shock}
+\end{figure}
+
+\end{document}

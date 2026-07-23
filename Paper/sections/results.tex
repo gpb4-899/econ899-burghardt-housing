@@ -3,6 +3,17 @@
 
 \subsection{Average response of house prices}
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{irf_baseline.pdf}
+  \caption{Average response of real house prices to a one basis point
+  tightening surprise, in percent, with a 95 percent confidence band.
+  Baseline specification with dynamic controls, country fixed effects
+  and Driscoll Kraay standard errors, eleven euro area countries,
+  1999Q4 to 2025Q4.}
+  \label{fig:baseline}
+\end{figure}
+
 Figure \ref{fig:baseline} shows the estimated response of real house prices to a
 one basis point tightening surprise, averaged across the eleven countries. The
 response is close to zero at every horizon. It is mildly negative over the first
@@ -25,6 +36,20 @@ mortgages are mostly variable rate and countries where they are mostly fixed
 rate. Table \ref{tab:main} reports the interaction between the shock and the
 adjustable rate indicator at horizons of zero, four and eight quarters, and
 Figure \ref{fig:interaction} plots it over the full twelve quarter horizon.
+
+\input{tables/lp_main}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{irf_interaction.pdf}
+  \caption{Differential response of variable rate countries, in
+  percentage points per basis point of tightening surprise. The solid
+  line is the baseline specification with dynamic controls, with a 95
+  percent confidence band; the dotted line is the same specification
+  without the dynamic controls. Country fixed effects and Driscoll
+  Kraay standard errors throughout.}
+  \label{fig:interaction}
+\end{figure}
 
 In the baseline specification the interaction is positive at every horizon,
 rising from about $0.02$ on impact to $0.06$ after twelve quarters. A positive
