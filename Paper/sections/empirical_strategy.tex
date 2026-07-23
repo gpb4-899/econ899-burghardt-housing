@@ -16,15 +16,17 @@ $h = 0, 1, \ldots, 12$ I estimate
 
 \begin{equation}
 \label{eq:lp}
+\begin{split}
 100 \left( \ln HP_{c,t+h} - \ln HP_{c,t-1} \right)
-= \beta_h \, \varepsilon_t
+= {} & \beta_h \, \varepsilon_t
 + \delta_h \left( \varepsilon_t \times ARM_c \right)
 + \sum_{j=1}^{2} \phi_{h,j} \, \varepsilon_{t-j}
-+ \sum_{j=1}^{2} \rho_{h,j} \, g_{c,t-j}
-+ \gamma_h' X_{c,t-1}
++ \sum_{j=1}^{2} \rho_{h,j} \, g_{c,t-j} \\
+& + \gamma_h' X_{c,t-1}
 + \kappa_h \, C_t
 + \alpha_c
 + u_{c,t+h},
+\end{split}
 \end{equation}
 
 where $HP_{c,t}$ is the real house price index, $\varepsilon_t$ is the
