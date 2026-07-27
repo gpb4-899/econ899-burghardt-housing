@@ -45,12 +45,12 @@ versioned; they are produced by the code.
   - `02_house_prices.R` downloads real house price indices.
   - `03_controls.R` downloads GDP growth, inflation and unemployment.
 - `Programs/02_analysis/` reads cleaned data and writes to `Results`.
-  - `03_merge_and_regress.R` builds the panel and estimates the main local
+  - `02_merge_and_regress.R` builds the panel and estimates the main local
     projections. The baseline includes the standard dynamic controls; the
     same specification without them is reported alongside it. Writes the
     main results table and both figures.
-  - `04_coverage_audit.R` documents the sample coverage.
-  - `05_diagnostics.R` shock validation, LP dynamics, and the pre/post 2009
+  - `03_coverage_audit.R` documents the sample coverage.
+  - `04_diagnostics.R` shock validation, LP dynamics, and the pre/post 2009
     subsample split.
 
 ## Instructions to replicators
@@ -66,14 +66,14 @@ Outputs appear in `Results/tables` and `Results/figures`.
 
 | Output | Produced by |
 | --- | --- |
-| `Results/tables/summary_stats.tex` | `02_analysis/01_summary_stats.R` |
-| `Results/tables/lp_main.tex` | `02_analysis/03_merge_and_regress.R` |
-| `Results/tables/lp_robust_unemp.tex` | `02_analysis/03_merge_and_regress.R` |
-| `Results/figures/irf_interaction.pdf` | `02_analysis/03_merge_and_regress.R` |
-| `Results/figures/irf_baseline.pdf` | `02_analysis/03_merge_and_regress.R` |
-| `Results/tables/coverage_audit.csv` | `02_analysis/04_coverage_audit.R` |
-| `Results/figures/shock_series.pdf`, `irf_dynamics.pdf` | `02_analysis/05_diagnostics.R` |
-| `Results/tables/subsample_interaction.csv` | `02_analysis/05_diagnostics.R` |
+| `Results/tables/Table01_summary_stats.tex` | `02_analysis/01_summary_stats.R` |
+| `Results/tables/Table02_lp_main.tex` | `02_analysis/02_merge_and_regress.R` |
+| `Results/tables/TableA1_lp_robust_unemp.tex` | `02_analysis/02_merge_and_regress.R` |
+| `Results/figures/Fig02_irf_interaction.pdf` | `02_analysis/02_merge_and_regress.R` |
+| `Results/figures/Fig01_irf_baseline.pdf` | `02_analysis/02_merge_and_regress.R` |
+| `Results/tables/coverage_audit.csv` | `02_analysis/03_coverage_audit.R` |
+| `Results/figures/FigA1_shock_series.pdf`, `irf_dynamics.pdf` | `02_analysis/04_diagnostics.R` |
+| `Results/tables/subsample_interaction.csv` | `02_analysis/04_diagnostics.R` |
 
 ## References
 

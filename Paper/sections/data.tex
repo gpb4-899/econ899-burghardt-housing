@@ -14,12 +14,12 @@ market structure.
 Table \ref{tab:summary} reports summary statistics for the estimation
 sample.
 
-\input{tables/summary_stats}
+{\footnotesize\input{tables/Table01_summary_stats}}
 
 \subsection{House prices}
 
-House prices come from the OECD Analytical House Prices dataset, which I
-access through DBnomics. Each country reports a quarterly real residential
+House prices come from the OECD Analytical House Prices dataset
+\citep{oecd2026}, which I access through DBnomics. Each country reports a quarterly real residential
 property price index with base year 2015. Levels of such an index mean
 little across borders, so the analysis works with cumulative log changes
 times one hundred, which read as responses in percent and do not depend on
@@ -30,8 +30,9 @@ the choice of base year.
 Measuring monetary policy is the harder task. Simply using the policy rate
 would confuse cause and effect, because the ECB moves that rate in response
 to the same economy that drives house prices. The shock series therefore
-comes from the Euro Area Monetary Policy event study Database (EA-MPD) of
-\citet{altavilla2019}, which records how asset prices move in a narrow
+comes from the Euro Area Monetary Policy event study Database
+\citep[EA-MPD,][]{ecb2026} of \citet{altavilla2019}, which records how
+asset prices move in a narrow
 window around each ECB monetary policy event, spanning both the decision
 and the press conference. Within such a window little else happens, so the
 jump in the three month overnight index swap (OIS) rate captures the
@@ -58,7 +59,8 @@ removes.
 
 \subsection{Macroeconomic controls}
 
-Three Eurostat series capture the domestic macroeconomic environment. Real
+Three Eurostat series \citep{eurostat2026} capture the domestic
+macroeconomic environment. Real
 gross domestic product (chain linked volumes, seasonally adjusted) enters
 as the quarter on quarter growth rate, and consumer prices enter as the
 year on year change in the Harmonised Index of Consumer Prices. For

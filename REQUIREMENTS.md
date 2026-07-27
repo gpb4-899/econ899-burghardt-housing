@@ -47,19 +47,18 @@ audit, and the short versus long rate decomposition.
 - [x] Data section (draft: paper/sections/data.tex)
   - [x] All data sources cited (EA-MPD, OECD house prices, Eurostat controls,
         mortgage classification)
-  - [x] Summary statistics table (01_summary_stats.R -> summary_stats.tex)
+  - [x] Summary statistics table (01_summary_stats.R -> Table01_summary_stats.tex)
   - [x] Variable definitions and treatment of missing values
-- [ ] Empirical strategy / model (local projections, shock identification,
-      interaction, Driscoll Kraay standard errors, sample)
+- [x] Empirical strategy / model (draft: sections/empirical_strategy.tex)
 - [x] Results, in plain English plus tables and figures
       (draft: Paper/sections/results.tex)
-- [ ] Robustness checks (mostly in appendix): raw vs pure shock, subsample
-      pre/post 2009, alternative controls, unemployment
+- [x] Robustness checks in appendix: unemployment (TableA1), raw vs pure
+      shock (TableA2), subsample pre/post 2009 (TableA3), shock series (FigA1)
 - [x] Conclusion (draft: sections/conclusion.tex, Bellemare formula)
   - [x] Limitations include the power limitation with a concrete explanation
   - [x] Future research: regional route, cites Battistini et al. 2025 (EER)
 - [x] References (references.bib, 19 entries, all cited in text)
-- [ ] Appendix (robustness, extra tables, summary statistics)
+- [x] Appendix (TableA1 to TableA3, FigA1, lettered numbering)
 
 Length norm from the example papers: roughly 16 to 25 pages of main text.
 
@@ -83,10 +82,10 @@ Gaps to close:
       OECD via rdbnomics, Eurostat datasets, ECB MIR)
 - [x] EA-MPD raw file committed (.gitignore exception), package self contained
 - [ ] 00_setup.R could also note how to obtain raw data (minor)
-- [ ] Program naming in 02_analysis: workshop wants output based names
-      (Table01.R produces Results/Table01, Figure01.R produces Figure01).
-      Current names are task based. Defer until the specification is final
-      after Brian's steer.
+- [x] Program naming and outputs follow the paper numbering (Table01, Table02,
+      TableA1, Fig01, Fig02, FigA1), scripts numbered sequentially 01 to 04.
+
+
 - [ ] Optional: assert statements in each program to catch changes in key
       results
 

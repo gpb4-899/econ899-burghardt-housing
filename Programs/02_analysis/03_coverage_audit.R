@@ -1,7 +1,7 @@
-# 04_coverage_audit.R
+# 03_coverage_audit.R
 # ---------------------------------------------------------------
 # Documents sample coverage. Rebuilds the same panel as
-# 03_merge_and_regress.R (hp inner join shock, left join controls,
+# 02_merge_and_regress.R (hp inner join shock, left join controls,
 # controls lagged one quarter), then reports:
 #   (1) how many observations each lagged control keeps or drops
 #   (2) completeness on the BASELINE controls (lagged GDP growth and
@@ -24,7 +24,7 @@ shock    <- readRDS(file.path(PATH$clean, "mp_shock_quarterly.rds"))
 hp       <- readRDS(file.path(PATH$clean, "house_prices_quarterly.rds"))
 controls <- readRDS(file.path(PATH$clean, "controls_quarterly.rds"))
 
-# ---- 2. Rebuild the panel exactly as in 03_merge_and_regress.R ----
+# ---- 2. Rebuild the panel exactly as in 02_merge_and_regress.R ----
 panel <- hp |>
   inner_join(shock |> select(-year, -quarter), by = "yq") |>
   left_join(controls, by = c("country", "yq")) |>

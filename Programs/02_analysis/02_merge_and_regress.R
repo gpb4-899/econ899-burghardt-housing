@@ -1,4 +1,4 @@
-# 03_merge_and_regress.R
+# 02_merge_and_regress.R
 # ---------------------------------------------------------------
 # Builds the country by quarter panel and estimates the paper's main
 # local projections.
@@ -132,11 +132,18 @@ lbl <- c(dy = "Cumulative real house price change (\\%)",
 
 etable(models,
        tex     = TRUE,
-       file    = file.path(PATH$tables, "lp_main.tex"),
+       file    = file.path(PATH$tables, "Table02_lp_main.tex"),
        replace = TRUE,
        title   = paste("House price response to ECB monetary policy shocks",
                        "by mortgage market structure"),
        label   = "tab:main",
+       notes   = paste("Country by quarter panel of eleven euro area countries,",
+                       "1999Q4 to 2025Q4. The dependent variable is the cumulative",
+                       "change in log real house prices from $t-1$ to $t+h$, in",
+                       "percent per basis point of tightening surprise. Columns (1),",
+                       "(3) and (5) show the baseline with dynamic controls at",
+                       "horizons 0, 4 and 8, columns (2), (4) and (6) the same",
+                       "specification without the dynamic controls."),
        dict    = lbl)
 
 # ---- 7. Appendix: adding unemployment to the baseline ----
@@ -146,10 +153,13 @@ for (h in c(0, 4, 8)) {
   rob[[paste0("h=", h)]] <- fit(d, ctrl_unemp)
 }
 etable(rob,
-       tex = TRUE, file = file.path(PATH$tables, "lp_robust_unemp.tex"),
+       tex = TRUE, file = file.path(PATH$tables, "TableA1_lp_robust_unemp.tex"),
        replace = TRUE,
        title = "Appendix: baseline specification adding unemployment",
        label = "tab:robust_unemp",
+       notes = paste("Baseline specification with the lagged unemployment rate",
+                     "added, at horizons 0, 4 and 8. Sample and construction as",
+                     "in the main table."),
        dict = lbl)
 
 # ---- 8. Figure 1: interaction under both specifications ----
@@ -166,7 +176,7 @@ p_int <- irf |>
        caption = paste("Solid: baseline with dynamics (95% band).",
                        "Dotted: same specification without dynamic controls.")) +
   theme_minimal(base_size = 12)
-ggsave(file.path(PATH$figures, "irf_interaction.pdf"), p_int,
+ggsave(file.path(PATH$figures, "Fig02_irf_interaction.pdf"), p_int,
        width = 7, height = 4.5)
 
 # ---- 9. Figure 2: average house price response, baseline ----
@@ -180,8 +190,8 @@ p_avg <- irf |>
        y = "Real house price response (%)",
        caption = "Average response to a one basis point tightening surprise, 95% band.") +
   theme_minimal(base_size = 12)
-ggsave(file.path(PATH$figures, "irf_baseline.pdf"), p_avg,
+ggsave(file.path(PATH$figures, "Fig01_irf_baseline.pdf"), p_avg,
        width = 7, height = 4.5)
 
-cat("\nSaved: lp_main.tex, lp_robust_unemp.tex,",
-    "irf_interaction.pdf and irf_baseline.pdf\n")
+cat("\nSaved: Table02_lp_main.tex, TableA1_lp_robust_unemp.tex,",
+    "Fig02_irf_interaction.pdf and Fig01_irf_baseline.pdf\n")

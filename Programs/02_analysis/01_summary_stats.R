@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------
 # Builds the summary statistics table for the ESTIMATION sample and
 # writes it to Results/tables/summary_stats.tex. The panel and the
-# lag construction replicate 03_merge_and_regress.R exactly, and the
+# lag construction replicate 02_merge_and_regress.R exactly, and the
 # sample is restricted to the observations that enter the baseline
 # local projection at horizon zero (dy, shock, two lags of the shock,
 # two lags of house price growth, lagged GDP growth and inflation all
@@ -89,6 +89,6 @@ tex <- c(
   "\\end{minipage}", "\\end{table}"
 )
 
-writeLines(tex, file.path(PATH$tables, "summary_stats.tex"))
-cat("Wrote Results/tables/summary_stats.tex\n")
+writeLines(tex, file.path(PATH$tables, "Table01_summary_stats.tex"))
+cat("Wrote Results/tables/Table01_summary_stats.tex\n")
 cat("Panel:", n_ctry, "countries,", rng, "\n")

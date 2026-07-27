@@ -13,14 +13,16 @@
 \usepackage{booktabs}       % required by the fixest etable output
 \usepackage{graphicx}
 \usepackage{setspace}
+\usepackage[font=footnotesize]{caption}
 \usepackage[round]{natbib}
 \usepackage[hidelinks]{hyperref}
 
 \graphicspath{{figures/}}
-\onehalfspacing
+\setstretch{1.2}
 
 \title{Mortgage market structure and the transmission of ECB monetary
-policy to euro area house prices}
+policy to euro area house prices\thanks{The replication package is
+available at \url{https://github.com/gpb4-899/econ899-housing-mp}.}}
 \author{Gil Burghardt\\Department of Economics, Simon Fraser University}
 \date{\today}
 
@@ -54,21 +56,29 @@ significant. A cross country design alone cannot identify this channel.
 \bibliography{references}
 
 \appendix
+\setcounter{table}{0}
+\renewcommand{\thetable}{A\arabic{table}}
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{A\arabic{figure}}
 
 \section{Appendix}
 \label{sec:appendix}
 
 % Robustness exhibits (outside the 5 exhibit budget of the main text):
 % unemployment robustness, shock validation, subsample split.
-\input{tables/lp_robust_unemp}
+{\footnotesize\input{tables/TableA1_lp_robust_unemp}}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.9\textwidth]{shock_series.pdf}
+  \includegraphics[width=0.9\textwidth]{FigA1_shock_series.pdf}
   \caption{Information cleaned ECB monetary policy shock. Quarterly sum
   of the three month OIS surprises classified as pure monetary policy
   events. Positive values are tightening surprises in basis points.}
   \label{fig:shock}
 \end{figure}
+
+{\footnotesize\input{tables/TableA2_raw_vs_pure}}
+
+{\footnotesize\input{tables/TableA3_subsample}}
 
 \end{document}
