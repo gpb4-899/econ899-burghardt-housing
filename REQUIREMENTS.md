@@ -39,13 +39,11 @@ audit, and the short versus long rate decomposition.
 
 ## A. The paper (empirical structure)
 
-- [ ] Abstract, max 100 words, written to recruit a reader
-- [ ] Introduction (Head formula: hook, question, antecedents, value added,
-      answer, short road map)
-- [ ] Background / institutional context (euro area mortgage markets, fixed
-      vs variable structure, ECB monetary policy)
-- [ ] Theoretical framework / mechanism (budget or user cost channel; also
-      motivates the short rate prediction)
+- [x] Abstract, max 100 words, written to recruit a reader (main.tex)
+- [x] Introduction (draft: sections/introduction.tex, follows the PA3
+      suggested model)
+- [x] Background / institutional context (draft: sections/background.tex)
+- [x] Theoretical framework / mechanism (draft: sections/mechanism.tex)
 - [x] Data section (draft: paper/sections/data.tex)
   - [x] All data sources cited (EA-MPD, OECD house prices, Eurostat controls,
         mortgage classification)
@@ -57,11 +55,10 @@ audit, and the short versus long rate decomposition.
       (draft: Paper/sections/results.tex)
 - [ ] Robustness checks (mostly in appendix): raw vs pure shock, subsample
       pre/post 2009, alternative controls, unemployment
-- [ ] Conclusion (Bellemare formula: summary, limitations, policy
-      implications, future research; keep brief)
-  - [ ] Limitations must include the power limitation honestly
-  - [ ] Future research: regional route, cite Battistini et al. 2024
-- [ ] References with every data source
+- [x] Conclusion (draft: sections/conclusion.tex, Bellemare formula)
+  - [x] Limitations include the power limitation with a concrete explanation
+  - [x] Future research: regional route, cites Battistini et al. 2025 (EER)
+- [x] References (references.bib, 19 entries, all cited in text)
 - [ ] Appendix (robustness, extra tables, summary statistics)
 
 Length norm from the example papers: roughly 16 to 25 pages of main text.
