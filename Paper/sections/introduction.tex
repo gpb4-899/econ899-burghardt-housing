@@ -1,6 +1,75 @@
 \section{Introduction}
 \label{sec:intro}
 
-% TODO: write from the PA3 worksheet, in this order (Brian's model):
-% background strictly necessary, research problem (condition and
-% consequence), approach, main results, objections, contributions.
+Between July 2022 and September 2023 the ECB raised its policy rates by 450
+basis points, the fastest tightening in the history of the euro. Real house
+prices fell almost everywhere in the currency union, but by very different
+amounts. One reason to expect such differences is written into mortgage
+contracts. A Spanish or Finnish borrower, whose rate tracks the Euribor,
+felt the tightening in her monthly payment within months. A German or
+French borrower, whose rate was fixed years earlier, often felt nothing at
+all. If monetary policy reaches household budgets at such different speeds,
+the same decision in Frankfurt could move national housing markets by very
+different amounts.
+
+Whether it actually does is an open question. The euro area combines a
+single monetary policy with mortgage systems that differ more than almost
+any other institutional feature of its member states, and yet direct
+evidence on house prices is scarce. A well established literature shows
+that mortgage structure shapes the transmission of policy into household
+consumption \citep{calza2013, dimaggio2017, cloyne2020}, and recent work
+documents heterogeneous housing responses across countries and regions
+\citep{corsetti2022, battistini2025}. Whether the fixed versus variable
+character of a national mortgage market translates a common shock into
+systematically different house price responses has, to my knowledge, not
+been tested directly. As long as this evidence is missing, the common
+presumption that variable rate countries carry more of the burden of a
+tightening rests on indirect evidence, and neither the ECB nor national
+macroprudential authorities can judge how unevenly a common decision lands
+on national housing markets.
+
+This paper asks the question directly. I build a quarterly panel of eleven
+euro area countries from 1999 to 2025 and estimate panel local projections
+\citep{jorda2005} of real house prices on high frequency monetary policy
+surprises from the EA-MPD of \citet{altavilla2019}. Because raw surprises
+mix policy news with central bank information about the economy, I clean
+them with the sign restriction of \citet{jarocinski2020}. The cleaned shock
+is then interacted with a binary classification of countries into fixed
+rate dominant and variable rate dominant mortgage markets, following
+\citet{badarinza2018}. Country fixed effects, lagged macroeconomic controls
+and Driscoll Kraay standard errors complete the specification.
+
+The answer is a carefully qualified no. Averaged across countries, a
+surprise tightening lowers real house prices somewhat over the first year,
+though over the full sample this response is close to zero and imprecise.
+Since 2009 the immediate response is negative and statistically
+significant. On the central question, however, I find no robust evidence
+that house prices in variable rate countries respond more strongly. The
+estimated difference between the two country groups is small, it changes
+sign depending on whether standard dynamic controls are included, and it
+is not robustly significant anywhere. One further result stands out along
+the way. Without the information correction, house prices appear to rise
+after a tightening, so separating policy from information shocks is not a
+refinement but a necessity for housing outcomes.
+
+Three objections deserve an answer up front. The shock could be
+mismeasured, but the series behaves as it should in well known ECB
+episodes, and the contrast between raw and cleaned surprises matches what
+the information effect literature predicts. The binary mortgage
+classification is coarse, which is why I interpret the interaction as a
+descriptive difference between country groups rather than a pure causal
+effect of mortgage structure. Finally, eleven countries and one common
+shock cannot deliver precise interaction estimates. That is true, and I
+treat it openly as part of the answer rather than a footnote. The
+confidence intervals say precisely how much heterogeneity the data can and
+cannot rule out.
+
+The paper makes three contributions. It provides direct evidence on house
+prices, rather than consumption or mortgage payments, for the mortgage
+structure channel in the euro area, on a sample long enough to include the
+2022 to 2023 tightening and the subsequent easing. It shows that the
+information content of ECB announcements matters decisively for estimated
+housing responses. And it offers a transparent assessment of what a cross
+country design can identify, which qualifies existing cross country
+evidence and strengthens the case for regional data along the lines of
+\citet{battistini2025}.
