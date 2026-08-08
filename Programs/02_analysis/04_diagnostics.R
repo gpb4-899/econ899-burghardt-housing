@@ -79,16 +79,22 @@ cat("\n########## PART 1: SHOCK VALIDATION ##########\n")
 # 1a. The shock is common across countries, so collapse to one row/quarter.
 sh <- panel |> distinct(yq, shock, shock_raw)
 
-p_sh <- ggplot(sh, aes(x = yq, y = shock)) +
+p_sh <- sh |>
+  mutate(direction = ifelse(shock >= 0, "Tightening surprise",
+                            "Easing surprise")) |>
+  ggplot(aes(x = yq, y = shock, fill = direction)) +
   geom_hline(yintercept = 0, linewidth = 0.3) +
   geom_col(width = 60) +
+  scale_fill_manual(values = c("Tightening surprise" = "grey20",
+                               "Easing surprise" = "grey65")) +
   labs(
     x = NULL,
     y = "Pure MP shock (summed 3m OIS surprise, bp)",
     title = "Information cleaned ECB monetary policy shock",
-    subtitle = "Positive = tightening surprise"
+    fill = NULL
   ) +
-  theme_minimal(base_size = 12)
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "top")
 ggsave(file.path(PATH$figures, "FigA1_shock_series.pdf"), p_sh, width = 8, height = 4)
 
 # 1b. Print the shock in quarters of well known ECB moves so you can

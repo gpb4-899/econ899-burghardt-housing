@@ -173,6 +173,7 @@ p_int <- irf |>
   geom_ribbon(aes(ymin = lo, ymax = hi), alpha = 0.18) +
   geom_line(aes(y = b_inter_dyn), linewidth = 0.9) +
   geom_line(aes(y = b_inter_simp), linewidth = 0.7, linetype = "dotted") +
+  scale_x_continuous(breaks = seq(0, 12, 2)) +
   labs(x = "Quarters after the shock",
        y = "Differential response of ARM countries (pp)",
        caption = paste("Solid: baseline with dynamics (95% band).",
@@ -188,6 +189,7 @@ p_avg <- irf |>
   geom_hline(yintercept = 0, linetype = "dashed") +
   geom_ribbon(aes(ymin = lo, ymax = hi), alpha = 0.18) +
   geom_line(linewidth = 0.9) +
+  scale_x_continuous(breaks = seq(0, 12, 2)) +
   labs(x = "Quarters after the shock",
        y = "Real house price response (%)",
        caption = "Average response to a one basis point tightening surprise, 95% band.") +
@@ -195,5 +197,32 @@ p_avg <- irf |>
 ggsave(file.path(PATH$figures, "Fig01_irf_baseline.pdf"), p_avg,
        width = 7, height = 4.5)
 
+# ---- 10. Appendix Table A4: time fixed effects, interaction only ----
+# Time fixed effects absorb the shock, its lags, the covid dummy and every
+# other euro area wide variable. The main effect drops out and the
+# interaction is identified from the within quarter difference between the
+# two country groups.
+tfe <- list()
+for (h in c(0, 4, 8)) {
+  d <- make_dy(panel, h)
+  f <- as.formula(paste("dy ~ shock:arm + l1_g + l2_g +",
+                        "l_gdp_growth + l_inflation | country + yq"))
+  tfe[[paste0("h=", h)]] <- feols(f, data = d, panel.id = ~ country + yq,
+                                  vcov = "DK")
+}
+cat("\nTime FE robustness (interaction only):\n")
+print(lapply(tfe, function(m) round(coeftable(m)["shock:arm", ], 4)))
+etable(tfe, tex = TRUE,
+       file = file.path(PATH$tables, "TableA4_timefe.tex"),
+       replace = TRUE,
+       title = "Robustness: interaction with time fixed effects",
+       label = "tab:timefe",
+       headers = c("h = 0", "h = 4", "h = 8"),
+       notes = paste("Time fixed effects absorb the shock, its lags, the",
+                     "pandemic dummy and every other common variable, so only",
+                     "the interaction and the country level controls remain.",
+                     "Driscoll Kraay standard errors."),
+       dict = lbl)
+
 cat("\nSaved: Table02_lp_main.tex, TableA1_lp_robust_unemp.tex,",
-    "Fig02_irf_interaction.pdf and Fig01_irf_baseline.pdf\n")
+    "Fig02_irf_interaction.pdf, Fig01_irf_baseline.pdf and TableA4_timefe.tex\n")

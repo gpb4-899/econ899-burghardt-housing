@@ -32,16 +32,16 @@ available at \url{https://github.com/gpb4-899/econ899-housing-mp}.}}
 
 \begin{abstract}
 \noindent
-Does the structure of national mortgage markets shape how ECB monetary
-policy moves house prices? I estimate panel local projections for eleven
-euro area countries from 1999 to 2025, using high frequency policy
-surprises cleaned of central bank information effects and interacted with
-a fixed versus variable rate classification of mortgage markets. House
-prices respond negatively to tightening since 2009, and the information
-correction is essential. Evidence that variable rate
-countries respond more strongly, however, is fragile. The differential is
-small, changes sign across specifications, and is never robustly
-significant. A cross country design alone cannot identify this channel.
+Does the structure of national mortgage markets shape how European
+Central Bank (ECB) monetary policy moves house prices? I estimate panel
+local projections for eleven euro area countries from 1999 to 2025, using
+information cleaned high frequency policy surprises interacted with a
+fixed versus variable rate classification of mortgage markets. House
+prices respond negatively to tightening since 2009, and this result
+requires the information correction. However, evidence that variable rate
+countries respond more strongly is fragile. The differential is small,
+changes sign across specifications, and is never robustly significant. A
+cross country design alone cannot identify this channel.
 \end{abstract}
 
 \input{sections/introduction}
@@ -80,5 +80,10 @@ significant. A cross country design alone cannot identify this channel.
 {\footnotesize\input{tables/TableA2_raw_vs_pure}}
 
 {\footnotesize\input{tables/TableA3_subsample}}
+
+% TableA4 is produced by 02_merge_and_regress.R. The IfFileExists guard
+% lets the paper compile before the first run that generates it.
+\IfFileExists{tables/TableA4_timefe.tex}{%
+{\footnotesize\input{tables/TableA4_timefe}}}{}
 
 \end{document}

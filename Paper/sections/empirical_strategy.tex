@@ -45,13 +45,16 @@ The parameter of interest is $\delta_h$, the difference in the house price
 response between variable rate and fixed rate countries at horizon $h$. The
 budget channel described in Section \ref{sec:mechanism} predicts
 $\delta_h < 0$. In countries where mortgage payments react quickly to policy
-rates, a tightening should depress house prices by more. The average
-response $\beta_h$ and the remaining coefficients are auxiliary. The main
-effect of $ARM_c$ does not appear in the equation because it is constant
-over time and therefore absorbed by the country fixed effect. I cannot
-include time fixed effects, because the shock is common to all countries
-and time effects would absorb it completely. This is a real cost of the design, and I
-return to it below.
+rates, a tightening should depress house prices by more. Because the
+interaction is included, $\beta_h$ is the response of the fixed rate
+countries, the baseline group, and not the euro area average. It and the
+remaining coefficients are auxiliary. The main effect of $ARM_c$ does not
+appear in the equation because it is constant over time and therefore
+absorbed by the country fixed effect. The baseline specification contains
+no time fixed effects, because the shock is common to all countries and
+time effects would absorb it completely. This is a real cost of the
+design, and the robustness check in Section \ref{sec:timefe} addresses it
+by dropping the main effect and keeping only the interaction.
 
 \subsection{Identification}
 
