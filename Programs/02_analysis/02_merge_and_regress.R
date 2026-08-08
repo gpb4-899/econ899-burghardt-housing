@@ -1,23 +1,10 @@
 # 02_merge_and_regress.R
-# ---------------------------------------------------------------
-# Builds the country by quarter panel and estimates the paper's main
-# local projections.
-#
-# Baseline specification: Jorda local projection with the standard
-# dynamic controls, two lags of the shock and two lags of house price
-# growth, plus lagged GDP growth, lagged inflation and a COVID dummy,
-# with country fixed effects and Driscoll Kraay standard errors.
-#
-# Alternative specification: the same without the dynamic terms. It is
-# reported alongside the baseline because the interaction coefficient
-# is sensitive to whether the dynamics are included, and that
-# sensitivity is a result in its own right.
-#
-# Writes: Results/tables/lp_main.tex          (Table 2, both specs)
-#         Results/tables/lp_robust_unemp.tex  (appendix)
-#         Results/figures/irf_interaction.pdf (Figure 1)
-#         Results/figures/irf_baseline.pdf    (Figure 2)
-# ---------------------------------------------------------------
+# Builds the country quarter panel and estimates the main local
+# projections, baseline with dynamic controls and the alternative
+# without them.
+# Writes: Table02_lp_main.tex, TableA1_lp_robust_unemp.tex,
+#         TableA4_timefe.tex, Fig01_irf_baseline.pdf,
+#         Fig02_irf_interaction.pdf
 
 source("config.R")
 
@@ -26,16 +13,13 @@ library(tidyr)
 library(fixest)
 library(ggplot2)
 
-# ---- 1. Load the cleaned inputs ----
 shock    <- readRDS(file.path(PATH$clean, "mp_shock_quarterly.rds"))
 hp       <- readRDS(file.path(PATH$clean, "house_prices_quarterly.rds"))
 controls <- readRDS(file.path(PATH$clean, "controls_quarterly.rds"))
 
 mortgage_structure <- MORTGAGE_STRUCTURE   # defined in config.R
 
-# ---- 2. Build the panel ----
-# The shock file carries its own year/quarter columns; drop them before
-# the join so they do not duplicate the house price panel's columns.
+# Drop the shock file's own year/quarter columns before the join.
 panel <- hp |>
   inner_join(shock |> select(-year, -quarter), by = "yq") |>
   left_join(controls, by = c("country", "yq")) |>
@@ -49,8 +33,6 @@ panel <- hp |>
                         yq <= as.Date("2021-06-01"))
   )
 
-# ---- 3. Lags. Controls are predetermined; the dynamic terms are the
-# standard local projection controls. ----
 panel <- panel |>
   group_by(country) |>
   arrange(yq, .by_group = TRUE) |>
@@ -72,7 +54,7 @@ cat("  Countries:", paste(sort(unique(panel$country)), collapse = ", "), "\n")
 cat("  Range:", format(min(panel$yq)), "to", format(max(panel$yq)), "\n")
 cat("  Rows:", nrow(panel), "\n\n")
 
-# ---- 4. Outcome: cumulative log change from t-1 to t+h, in percent ----
+# Outcome: cumulative log change from t-1 to t+h, in percent.
 H <- 12
 make_dy <- function(df, h) {
   df |>
@@ -87,17 +69,14 @@ ctrl_dyn    <- paste("l1_shock + l2_shock + l1_g + l2_g +",
 ctrl_simple <- "l_gdp_growth + l_inflation + covid"          # alternative
 ctrl_unemp  <- paste(ctrl_dyn, "+ l_unemp")                  # appendix
 
-# Note: the lagged dynamics enter uninteracted. The object of interest is
-# the contemporaneous shock x arm term; interacting the full lag set with
-# arm would add several parameters to an already weakly identified
-# specification. This is a deliberate simplification, stated in the paper.
+# The lagged dynamics enter uninteracted, a deliberate simplification
+# stated in the paper.
 fit <- function(d, ctrl, interact = TRUE) {
   rhs <- if (interact) "shock + shock:arm" else "shock"
   f <- as.formula(paste("dy ~", rhs, "+", ctrl, "| country"))
   feols(f, data = d, panel.id = ~ country + yq, vcov = "DK")
 }
 
-# ---- 5. Impulse responses under both specifications ----
 irf <- lapply(0:H, function(h) {
   d  <- make_dy(panel, h)
   mb <- fit(d, ctrl_dyn)         # baseline, with dynamics
@@ -115,7 +94,6 @@ irf <- lapply(0:H, function(h) {
 cat("Impulse responses (baseline = with dynamics):\n")
 print(as.data.frame(round(irf, 4)))
 
-# ---- 6. Table 2: both specifications at horizons 0, 4, 8 ----
 models <- list()
 for (h in c(0, 4, 8)) {
   d <- make_dy(panel, h)
@@ -147,7 +125,6 @@ etable(models,
                        "specification without the dynamic controls."),
        dict    = lbl)
 
-# ---- 7. Appendix: adding unemployment to the baseline ----
 rob <- list()
 for (h in c(0, 4, 8)) {
   d <- make_dy(panel, h)
@@ -164,7 +141,6 @@ etable(rob,
                      "in the main table."),
        dict = lbl)
 
-# ---- 8. Figure 1: interaction under both specifications ----
 p_int <- irf |>
   mutate(lo = b_inter_dyn - 1.96 * se_inter_dyn,
          hi = b_inter_dyn + 1.96 * se_inter_dyn) |>
@@ -182,7 +158,6 @@ p_int <- irf |>
 ggsave(file.path(PATH$figures, "Fig02_irf_interaction.pdf"), p_int,
        width = 7, height = 4.5)
 
-# ---- 9. Figure 2: average house price response, baseline ----
 p_avg <- irf |>
   mutate(lo = b_avg - 1.96 * se_avg, hi = b_avg + 1.96 * se_avg) |>
   ggplot(aes(x = h, y = b_avg)) +
@@ -197,11 +172,8 @@ p_avg <- irf |>
 ggsave(file.path(PATH$figures, "Fig01_irf_baseline.pdf"), p_avg,
        width = 7, height = 4.5)
 
-# ---- 10. Appendix Table A4: time fixed effects, interaction only ----
-# Time fixed effects absorb the shock, its lags, the covid dummy and every
-# other euro area wide variable. The main effect drops out and the
-# interaction is identified from the within quarter difference between the
-# two country groups.
+# Time fixed effects absorb every common variable including the shock,
+# so only the interaction remains, identified within quarter.
 tfe <- list()
 for (h in c(0, 4, 8)) {
   d <- make_dy(panel, h)

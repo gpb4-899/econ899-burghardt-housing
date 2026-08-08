@@ -1,14 +1,5 @@
-# 01_main.R
-# ---------------------------------------------------------------
-# Master run script. Sources config.R and then every program in the
-# correct order, data preparation first, then analysis. It does NOT
-# run the setup program: run 00_setup.R once by hand before this to
-# install the required packages.
-#
-# Usage (from the RStudio project root, project open so the working
-# directory is the repo root):
-#   source("01_main.R")
-# ---------------------------------------------------------------
+# 01_main.R -- runs the whole pipeline in order, data preparation
+# first, then analysis. Run 00_setup.R once beforehand.
 
 source("config.R")
 

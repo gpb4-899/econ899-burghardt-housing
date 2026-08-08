@@ -1,17 +1,7 @@
 # 01_shock_series.R
-# ---------------------------------------------------------------
-# Reads the raw EA-MPD Excel, cleans the monetary event window,
-# converts Excel serial dates, classifies each event into a pure
-# monetary policy shock vs a central bank information shock using
-# the Jarocinski and Karadi (2020) poor man's sign restriction,
-# and aggregates each series to quarterly frequency.
-#
-# Sign restriction (per event):
-#   interest rate surprise and stock reaction OPPOSITE sign -> pure MP
-#   interest rate surprise and stock reaction SAME sign     -> information
-#
+# EA-MPD events -> quarterly information cleaned MP shock (Jarocinski
+# Karadi poor man's sign restriction on the 3 month OIS surprise).
 # Writes: Data/data_for_analysis/mp_shock_quarterly.rds (+ .csv)
-# ---------------------------------------------------------------
 
 source("config.R")
 
@@ -20,18 +10,14 @@ library(dplyr)
 library(lubridate)
 library(janitor)
 
-# ---- 1. Read the Monetary Event Window ----
 ea_mpd_file <- file.path(PATH$raw, "Dataset_EA-MPD.xlsx")
 
 mp_raw <- read_excel(ea_mpd_file, sheet = "Monetary Event Window") |>
   clean_names()
 
-# ---- 2. Convert the date column to real dates ----
-# The date column is mixed: older rows are stored as Excel serial numbers,
-# newer rows as genuine date values. Coercing everything with as.numeric()
-# turns the genuine dates into NA and silently drops the most recent events
-# (this cost roughly two years of data, including the 2024/25 easing cycle).
-# The parser below handles both cases and reports anything it cannot read.
+# The date column mixes Excel serial numbers (older rows) and text in
+# dd/mm/yyyy (2024 onward); coercing everything with as.numeric() would
+# silently drop the recent events.
 parse_event_date <- function(x) {
   if (inherits(x, "Date"))    return(x)
   if (inherits(x, "POSIXct")) return(as.Date(x))
@@ -55,28 +41,15 @@ mp_raw <- mp_raw |> mutate(date = parse_event_date(date))
 n_bad <- sum(is.na(mp_raw$date))
 cat("Date parsing: ", n_before, " rows, ", n_bad, " unparsed.\n", sep = "")
 
-# ---- 3. Select the interest rate surprise and the stock reaction ----
-# Interest rate surprise: 3 month OIS (near term policy indicator).
-# Stock reaction: EURO STOXX 50 return in the same window.
 mp_events <- mp_raw |>
   select(date, ois_1m, ois_3m, ois_6m, ois_1y, ois_2y, ois_5y,
          ois_10y, stoxx50) |>
   filter(!is.na(date)) |>
   arrange(date)
 
-# ---- 4. Poor man's sign restriction on each event ----
-# Use the 3 month OIS surprise as the interest rate signal. The 3 month
-# rate is the standard near term policy indicator and is far less noisy
-# than the 1 month (raw vs filtered correlation 0.79 versus 0.52). The
-# event level information filter is kept because, empirically, it is the
-# only construction that delivers the theoretically correct negative and
-# hump shaped house price response; controlling for the equity surprise
-# at quarterly frequency does not purge the information effect.
-# opposite signs  (ois * stoxx < 0) -> pure monetary policy shock
-# same signs      (ois * stoxx > 0) -> information shock
-# zero or missing in either -> undefined, treated as pure MP by
-# convention; events with a missing STOXX reaction are counted and
-# reported below so this convention is never silent.
+# Per event: opposite signs of OIS and STOXX -> pure MP shock,
+# same signs -> information shock, zero or missing -> pure by
+# convention (missing STOXX events are counted below).
 mp_events <- mp_events |>
   mutate(
     is_information = if_else(ois_3m * stoxx50 > 0, 1L, 0L, missing = 0L),
@@ -91,7 +64,6 @@ cat("  Pure MP events:    ", sum(mp_events$is_information == 0L), "\n")
 cat("  Missing STOXX (pure by convention):",
     sum(is.na(mp_events$stoxx50)), "\n\n")
 
-# ---- 5. Aggregate to quarterly by summation ----
 mp_q <- mp_events |>
   mutate(
     year    = year(date),
@@ -115,7 +87,6 @@ mp_q <- mp_events |>
   ) |>
   arrange(yq)
 
-# ---- 6. Sanity checks ----
 cat("Quarterly shock series:\n")
 cat("  Range:", format(min(mp_q$yq)), "to", format(max(mp_q$yq)), "\n")
 cat("  Quarters:", nrow(mp_q), "\n")
@@ -124,7 +95,6 @@ cat("  Correlation raw 3M vs pure:",
 print(head(mp_q))
 print(tail(mp_q))
 
-# ---- 7. Save ----
 saveRDS(mp_q, file.path(PATH$clean, "mp_shock_quarterly.rds"))
 write.csv(mp_q, file.path(PATH$clean, "mp_shock_quarterly.csv"), row.names = FALSE)
 

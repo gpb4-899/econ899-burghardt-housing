@@ -1,13 +1,7 @@
 # 01_summary_stats.R
-# ---------------------------------------------------------------
-# Builds the summary statistics table for the ESTIMATION sample and
-# writes it to Results/tables/summary_stats.tex. The panel and the
-# lag construction replicate 02_merge_and_regress.R exactly, and the
-# sample is restricted to the observations that enter the baseline
-# local projection at horizon zero (dy, shock, two lags of the shock,
-# two lags of house price growth, lagged GDP growth and inflation all
-# non missing), so N matches column (1) of the main results table.
-# ---------------------------------------------------------------
+# Summary statistics for the estimation sample of the baseline
+# specification at h = 0, so N matches column (1) of the main table.
+# Writes: Results/tables/Table01_summary_stats.tex
 
 source("config.R")
 
@@ -19,6 +13,7 @@ controls <- readRDS(file.path(PATH$clean, "controls_quarterly.rds"))
 
 mortgage_structure <- MORTGAGE_STRUCTURE   # defined in config.R
 
+# Same panel construction as 02_merge_and_regress.R.
 panel <- hp |>
   inner_join(shock |> select(-year, -quarter), by = "yq") |>
   left_join(controls, by = c("country", "yq")) |>
@@ -47,7 +42,6 @@ panel <- panel |>
                         l_gdp_growth, l_inflation))
 cat("Estimation sample (baseline, h = 0):", nrow(panel), "observations\n")
 
-# Variables to describe (label -> column)
 vars <- c(
   "Real house price index"            = "hp_real",
   "Real house price growth (\\%, q/q)"= "hp_growth",
