@@ -67,3 +67,6 @@ Results/figures/*
 # local material, not part of the replication package
 _local/
 ~$*
+
+# paper source lives in Overleaf, not part of the replication package
+Paper/
