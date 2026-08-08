@@ -63,3 +63,7 @@ Results/figures/*
 !Results/**/README.md
 *.Rproj.user
 .Rhistory
+
+# local material, not part of the replication package
+_local/
+~$*
