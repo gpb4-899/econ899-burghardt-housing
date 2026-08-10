@@ -50,10 +50,12 @@ the LICENSE file.
   - `02_merge_and_regress.R` builds the panel and estimates the main local
     projections. The baseline includes the standard dynamic controls; the
     same specification without them is reported alongside it. Writes the
-    main results table and both figures.
+    main results table, both figures, and the unemployment and time fixed
+    effects robustness tables.
   - `03_coverage_audit.R` documents the sample coverage.
-  - `04_diagnostics.R` shock validation, LP dynamics, and the pre/post 2009
-    subsample split.
+  - `04_diagnostics.R` shock validation (raw versus cleaned surprises), LP
+    dynamics, and the pre/post 2009 subsample split, including the
+    corresponding appendix exhibits.
 
 ## Instructions to replicators
 
@@ -66,18 +68,29 @@ Outputs appear in `Results/tables` and `Results/figures`.
 
 ## List of exhibits
 
-| Output | Produced by |
+| Output (paper position) | Produced by |
 | --- | --- |
-| `Results/tables/Table01_summary_stats.tex` | `02_analysis/01_summary_stats.R` |
-| `Results/tables/Table02_lp_main.tex` | `02_analysis/02_merge_and_regress.R` |
-| `Results/tables/TableA1_lp_robust_unemp.tex` | `02_analysis/02_merge_and_regress.R` |
-| `Results/figures/Fig02_irf_interaction.pdf` | `02_analysis/02_merge_and_regress.R` |
-| `Results/figures/Fig01_irf_baseline.pdf` | `02_analysis/02_merge_and_regress.R` |
-| `Results/tables/coverage_audit.csv` | `02_analysis/03_coverage_audit.R` |
-| `Results/figures/FigA1_shock_series.pdf`, `irf_dynamics.pdf` | `02_analysis/04_diagnostics.R` |
-| `Results/tables/subsample_interaction.csv` | `02_analysis/04_diagnostics.R` |
+| `Results/tables/Table01_summary_stats.tex` (Table 1) | `02_analysis/01_summary_stats.R` |
+| `Results/tables/Table02_lp_main.tex` (Table 2) | `02_analysis/02_merge_and_regress.R` |
+| `Results/figures/Fig01_irf_baseline.pdf` (Figure 1) | `02_analysis/02_merge_and_regress.R` |
+| `Results/figures/Fig02_irf_interaction.pdf` (Figure 2) | `02_analysis/02_merge_and_regress.R` |
+| `Results/tables/TableA1_lp_robust_unemp.tex` (Table A1) | `02_analysis/02_merge_and_regress.R` |
+| `Results/tables/TableA4_timefe.tex` (Table A4) | `02_analysis/02_merge_and_regress.R` |
+| `Results/figures/FigA1_shock_series.pdf` (Figure A1) | `02_analysis/04_diagnostics.R` |
+| `Results/tables/TableA2_raw_vs_pure.tex` (Table A2) | `02_analysis/04_diagnostics.R` |
+| `Results/tables/TableA3_subsample.tex` (Table A3) | `02_analysis/04_diagnostics.R` |
+| `Results/tables/coverage_audit.csv` (not in paper) | `02_analysis/03_coverage_audit.R` |
+| `Results/figures/irf_dynamics.pdf`, `Results/tables/subsample_interaction.csv` (not in paper) | `02_analysis/04_diagnostics.R` |
 
 ## References
 
 Altavilla, C., Brugnolini, L., Gurkaynak, R., Motto, R., Ragusa, G. (2019).
 Measuring euro area monetary policy. Journal of Monetary Economics 108, 162-179.
+
+Badarinza, C., Campbell, J. Y., Ramadorai, T. (2018). What calls to ARMs?
+International evidence on interest rates and the choice of adjustable-rate
+mortgages. Management Science 64(5), 2275-2288.
+
+Jarocinski, M., Karadi, P. (2020). Deconstructing monetary policy surprises:
+the role of information shocks. American Economic Journal: Macroeconomics
+12(2), 1-43.
