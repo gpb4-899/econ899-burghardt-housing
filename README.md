@@ -20,8 +20,10 @@ raw data.
 | Real GDP, HICP, unemployment | Eurostat `namq_10_gdp`, `prc_hicp_midx`, `une_rt_m` | No | `Programs/01_dataprep/03_controls.R` (eurostat) |
 | Mortgage market structure | Badarinza et al. (2018) and related euro area evidence | n/a | classification defined once in `config.R` (`MORTGAGE_STRUCTURE`) |
 
-Cleaned data (`Data/data_for_analysis`) and results (`Results`) are not
-versioned; they are produced by the code.
+All data used in this package are publicly available. Cleaned data
+(`Data/data_for_analysis`) and results (`Results`) are not versioned; they
+are produced by the code. The code is licensed under the MIT license, see
+the LICENSE file.
 
 ## Computational requirements
 
